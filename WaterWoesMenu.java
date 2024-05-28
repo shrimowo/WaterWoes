@@ -17,23 +17,23 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
     public void mouseClicked(MouseEvent e) {
         int mousex=e.getX();
         int mousey=e.getY();
-        if (mousex <= 504 && mousey <= 1055) System.out.println("<=");
+        if (mousex <= 1000 && mousey <= 562) System.out.println("<=");
     }
     public void paint (Graphics g) {
-        final String fileName="Gnome.JPG";
+        final String fileName="sewer.JPG";
         ImageIcon image= new ImageIcon(fileName);
         super.paint(g);
-        image.paintIcon(this,g,0,55);
+        image.paintIcon(this,g,0,550);
     }
     void createDialog(){
         JDialog box = new JDialog(this);
         box.setBounds(400,400,120,90);
-        TextArea area = new TextArea("Thank You For Shopping With Us!");
+        TextArea area = new TextArea("Placment confirmed!");
         area.setEditable(false);
         box.add(area);
         box.toFront();
         box.setVisible(true);
-        box.setTitle("Gnome Receipt");
+        box.setTitle("");
     }
     public void actionPerformed(ActionEvent e){
         String cmd=e.getActionCommand();
@@ -60,11 +60,11 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
         this.toFront();
         this.setVisible(true);
         
-        WaterWoesText test = new WaterWoesText("zaza");
-        test.setLocationRelativeTo(this);
-        test.setVisible(true);
-        String reply=test.getText();
-        System.out.println(reply);
+        //WaterWoesText test = new WaterWoesText("zaza");
+        //test.setLocationRelativeTo(this);
+        //test.setVisible(true);
+        //String reply=test.getText();
+        //System.out.println(reply);
         
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(504,1000));
