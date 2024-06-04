@@ -38,13 +38,13 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
     public void actionPerformed(ActionEvent e){
         String cmd=e.getActionCommand();
         switch(cmd){
-            case "Gnome House" : System.out.println("House purchased"); createDialog();
+            case "Water Source" : System.out.println("Water Source Placed"); createDialog();
                 break;
-            case "Mushroom Seeds" : System.out.println("Seeds purchased"); createDialog();
+            case "Sink" : System.out.println("Sink Placed"); createDialog();
                 break;
-            case "Phrygian Cap" : System.out.println("Cap purchased"); createDialog();
+            case "Pipe" : System.out.println("Pipe Placed"); createDialog();
                 break;
-            case "Small Boots" : System.out.println("Boots purchased"); createDialog();
+            case "Junction" : System.out.println("Junction Placed"); createDialog();
                 break;
             case "QUIT" : System.exit(0);
                 break;
@@ -53,18 +53,18 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
     public WaterWoesMenu()
     {
         System.out.print('\u000C');
-        setTitle("Gnome Store"); //Formerly gnome harvest
+        setTitle("Wellington Water");
         this.getContentPane().setPreferredSize(new Dimension(504,1055));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
         this.toFront();
         this.setVisible(true);
         
-        //WaterWoesText test = new WaterWoesText("zaza");
-        //test.setLocationRelativeTo(this);
-        //test.setVisible(true);
-        //String reply=test.getText();
-        //System.out.println(reply);
+        WaterWoesText test = new WaterWoesText("Guide to water works");
+        test.setLocationRelativeTo(this);
+        test.setVisible(true);
+        String reply=test.getText();
+        System.out.println(reply);
         
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(504,1000));
