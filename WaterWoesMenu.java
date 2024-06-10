@@ -17,7 +17,7 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
     public void mouseClicked(MouseEvent e) {
         int mousex=e.getX();
         int mousey=e.getY();
-        System.out.println("<= x:"+(mousex)+" y:"+(mousey));
+        System.out.println("Will place here:  x:"+(mousex)+" y:"+(mousey));
     }
     public void paint (Graphics g) {
         final String fileName="sewer.JPG";
@@ -54,13 +54,13 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
     {
         System.out.print('\u000C');
         setTitle("Wellington Water");
-        this.getContentPane().setPreferredSize(new Dimension(504,1055));
+        this.getContentPane().setPreferredSize(new Dimension(1055,1055));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
         this.toFront();
         this.setVisible(true);
         
-        WaterWoesText test = new WaterWoesText("Guide to water works");
+        WaterWoesText test = new WaterWoesText("Do You Want A Guide To Water-Works?");
         test.setLocationRelativeTo(this);
         test.setVisible(true);
         String reply=test.getText();
@@ -76,30 +76,30 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
         menuBar=new JMenuBar();
         this.setJMenuBar(menuBar);
         
-        menu = new JMenu("gnomenu");
+        menu = new JMenu("Infrastructure Options");
         menuBar.add(menu);
         
-        menuItem=new JMenuItem("Gnome House");
+        menuItem=new JMenuItem("Water Source");
         menuItem.addActionListener(this);
-        menuItem.setAccelerator(KeyStroke.getKeyStroke('h'));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke('w'));
         menu.add(menuItem);
         this.pack();
         
-        menuItem=new JMenuItem("Mushroom Seeds");
+        menuItem=new JMenuItem("Sink");
         menuItem.addActionListener(this);
         menuItem.setAccelerator(KeyStroke.getKeyStroke('s'));
         menu.add(menuItem);
         this.pack();
         
-        menuItem=new JMenuItem("Phrygian Cap");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke('c'));
+        menuItem=new JMenuItem("Pipe");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke('p'));
         menuItem.addActionListener(this);
         menu.add(menuItem);
         this.pack();    
         
-        menuItem=new JMenuItem("Small Boots");
+        menuItem=new JMenuItem("Junction");
         menuItem.addActionListener(this);
-        menuItem.setAccelerator(KeyStroke.getKeyStroke('b'));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke('j'));
         menu.add(menuItem);
         this.pack();  
         

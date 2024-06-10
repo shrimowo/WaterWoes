@@ -1,7 +1,3 @@
-
-//:3
-  // Gnomext |formerly gabafrool| \\
-    // Coding a menu 14/02/2024 \\
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -13,7 +9,7 @@ public class WaterWoesText extends JDialog
     {
         super (new JFrame(question),question);
         this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
-        this.setMinimumSize(new Dimension(question.length()*7,100));
+        this.setMinimumSize(new Dimension(question.length()*10,100));
         JTextField reply=new JTextField();
         JButton clickMe = new JButton("enter");
         clickMe.addActionListener(new ActionListener() {
