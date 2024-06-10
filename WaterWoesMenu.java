@@ -17,7 +17,7 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
     public void mouseClicked(MouseEvent e) {
         int mousex=e.getX();
         int mousey=e.getY();
-        if (mousex <= 1000 && mousey <= 562) System.out.println("<=");
+        System.out.println("<= x:"+(mousex)+" y:"+(mousey));
     }
     public void paint (Graphics g) {
         final String fileName="sewer.JPG";
