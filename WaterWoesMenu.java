@@ -4,13 +4,15 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-  // Gnomenu |formerly gabathrol| \\
+import java.awt.geom.*;
+  // Gnomenu |BAZINGA| \\
     // Coding a menu 14/02/2024 \\
 public class WaterWoesMenu extends JFrame implements ActionListener, MouseListener{
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem menuItem;
     Canvas myGraphic;
+    Graphics fixer;
     public void mouseExited(MouseEvent e) {} //{System.out.println("exit");}
     public void mouseEntered(MouseEvent e) {}//{System.out.println("enter");}
     public void mouseReleased(MouseEvent e) {}//{System.out.println("release");}
@@ -36,10 +38,15 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
         box.setVisible(true);
         box.setTitle("");
     }
+    public void createWaterSource (Graphics g){
+        super.paint(g);
+        Graphics2D g2 = (Graphics2D) g;
+        g2.drawOval(150,450,200,500);
+    }
     public void actionPerformed(ActionEvent e){
         String cmd=e.getActionCommand();
         switch(cmd){
-            case "Water Source" : System.out.println("Water Source Placed"); createDialog(); createWaterSource();
+            case "Water Source" : System.out.println("Water Source Placed"); createDialog(); createWaterSource(fixer);
                 break;
             case "Sink" : System.out.println("Sink Placed"); createDialog();
                 break;
@@ -109,10 +116,5 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
         menuItem.setAccelerator(KeyStroke.getKeyStroke('q'));
         menu.add(menuItem);
         this.pack();  
-    }
-    public void createWaterSource (Graphics g){
-        super.paint(g);
-        Graphics2D g2 = (Graphics2D) g;
-        g2.drawOval(150,450,200,500);
     }
 }
