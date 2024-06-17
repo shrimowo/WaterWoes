@@ -39,7 +39,7 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
     public void actionPerformed(ActionEvent e){
         String cmd=e.getActionCommand();
         switch(cmd){
-            case "Water Source" : System.out.println("Water Source Placed"); createDialog();
+            case "Water Source" : System.out.println("Water Source Placed"); createDialog(); createWaterSource();
                 break;
             case "Sink" : System.out.println("Sink Placed"); createDialog();
                 break;
@@ -109,5 +109,10 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
         menuItem.setAccelerator(KeyStroke.getKeyStroke('q'));
         menu.add(menuItem);
         this.pack();  
+    }
+    public void createWaterSource (Graphics g){
+        super.paint(g);
+        Graphics2D g2 = (Graphics2D) g;
+        g2.drawOval(150,450,200,500);
     }
 }
