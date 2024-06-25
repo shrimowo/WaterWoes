@@ -46,7 +46,7 @@ public class WaterWoesMenu extends JFrame implements ActionListener, MouseListen
     public void actionPerformed(ActionEvent e){
         String cmd=e.getActionCommand();
         switch(cmd){
-            case "Water Source" : System.out.println("Water Source Placed"); createDialog(); createWaterSource(fixer);
+            case "Water Source" : System.out.println("Water Source Placed"); createDialog();
                 break;
             case "Sink" : System.out.println("Sink Placed"); createDialog();
                 break;
