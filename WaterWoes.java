@@ -5,10 +5,14 @@ import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.geom.*;
+import java.util.Scanner; //Keyboard input
   // Gnomenu |BAZINGA| \\
     // Coding a menu 14/02/2024 \\
 public class WaterWoes extends JFrame implements ActionListener, MouseListener{
     final int GRIDSIZE = 7;
+    boolean StartScreen = true;
+    boolean GridGenerating = true;
+    Scanner keyboard;
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem menuItem;
