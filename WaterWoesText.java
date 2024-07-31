@@ -12,12 +12,12 @@ public class WaterWoesText extends JDialog
         this.setMinimumSize(new Dimension(question.length()*10,100));
         JTextField reply=new JTextField();
         JButton clickMe = new JButton("enter");
-        clickMe.addActionListener(new ActionListener() {
+        clickMe.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 remember=reply.getText();
                 close();
             }
-            });
+        });
         this.setLayout(new GridLayout(2,1,5,5));
         this.add(reply);
         this.add(clickMe);
@@ -25,6 +25,5 @@ public class WaterWoesText extends JDialog
         setModal(true);
     }
     private void close() {this.dispose();}
-    
     public String getText(){ return remember;}
 }
