@@ -1,13 +1,10 @@
 #BlueJ package file
-dependency1.from=Ver1WaterWoes
-dependency1.to=Creation
+dependency1.from=WaterWoes
+dependency1.to=WaterWoesText
 dependency1.type=UsesDependency
 dependency2.from=Ver1WaterWoes
 dependency2.to=WaterWoesText
 dependency2.type=UsesDependency
-dependency3.from=WaterWoes
-dependency3.to=WaterWoesText
-dependency3.type=UsesDependency
 editor.fx.0.height=1408
 editor.fx.0.width=2576
 editor.fx.0.x=-8
@@ -22,7 +19,7 @@ package.editor.x=0
 package.editor.y=0
 package.frame.height=830
 package.frame.width=1550
-package.numDependencies=3
+package.numDependencies=2
 package.numTargets=5
 package.showExtends=true
 package.showUses=true
