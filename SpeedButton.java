@@ -6,8 +6,7 @@ public class SpeedButton extends JFrame implements ActionListener{
     JButton slowButton;
     JButton pauseButton;
     JButton fastButton;
-    int currentSpeed;
-    int storedSpeed=0;
+    int speed=0;
     public SpeedButton()
     {
         slowButton = new JButton();
@@ -41,20 +40,19 @@ public class SpeedButton extends JFrame implements ActionListener{
     }
     public void actionPerformed(ActionEvent e){
         if (e.getSource()==slowButton){
-            System.out.println("Flow Rate Slowed");
-            storedSpeed--;
-            setTitle("Flow Rate is at: "+storedSpeed+" Units per Second");
-        if  (e.getSource()==fastButton){
+            if (speed == 0 ) System.out.println("Flow Rate Can't Be Slowed");
+            else
+            speed--;
+            setTitle("Flow Rate is at: "+speed+" Units per Second");
+        } else if  (e.getSource()==fastButton){
             System.out.println("Flow Rate Increased");
-            storedSpeed++;
-            setTitle("Flow Rate is at: "+storedSpeed+" Units per Second");
-            }
-        currentSpeed = storedSpeed;
-        if  (e.getSource()==pauseButton){
+            speed++;
+            setTitle("Flow Rate is at: "+speed+" Units per Second");
+            
+        } else if  (e.getSource()==pauseButton){
             System.out.println("Flow Rate Paused");
-            setTitle("Flow Rate is paused");
-            currentSpeed = 0;
-            }
+            speed = 0;
+            setTitle("Flow Rate is at:"+speed+" Units per Second");
         }
     }
 }
