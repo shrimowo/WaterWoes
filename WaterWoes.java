@@ -20,23 +20,17 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
     Graphics fixer;
     public WaterWoes()
     {
-        setTitle("Wellington Water");
-        this.getContentPane().setPreferredSize(new Dimension(1055,1055));
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.pack();
-        this.toFront();
-        this.setVisible(true);
-        
-        WaterWoesText test = new WaterWoesText("Do You Want A Guide To Water-Works?");
-        test.setLocationRelativeTo(this);
-        test.setVisible(true);
-        String reply=test.getText();
+        Creation test1 = new Creation();
+        WaterWoesText prompt = new WaterWoesText("Do You Want A Guide To Water-Works?");
+        prompt.setLocationRelativeTo(this);
+        prompt.setVisible(true);
+        String reply=prompt.getText();
         System.out.println(reply);
         
-        JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(504,1000));
-        myGraphic = new Canvas();
-        panel.add(myGraphic);
+        //JPanel panel = new JPanel();
+        //panel.setPreferredSize(new Dimension(504,1000));
+        //myGraphic = new Canvas();
+        //panel.add(myGraphic);
         
         addMouseListener(this);
         
@@ -94,11 +88,6 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
         box.toFront();
         box.setVisible(true);
         box.setTitle("");
-    }
-    public void createWaterSource (Graphics g){
-        super.paint(g);
-        Graphics2D g2 = (Graphics2D) g;
-        g2.drawLine(100,100,100,100);
     }
     public void actionPerformed(ActionEvent e){
         String cmd=e.getActionCommand();
