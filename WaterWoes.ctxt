@@ -16,4 +16,6 @@ comment7.params=
 comment7.target=void\ createDialog()
 comment8.params=e
 comment8.target=void\ actionPerformed(java.awt.event.ActionEvent)
-numComments=9
+comment9.params=g
+comment9.target=void\ paint(java.awt.Graphics)
+numComments=10

@@ -1,9 +1,9 @@
-public class GridGeneration
+public class GridWorkings
 {
     int GRIDSIZE = 10;
     boolean GridGenerating;
     int Timer;
-    public GridGeneration()
+    public GridWorkings()
     {
         int[][] Grid = new int[GRIDSIZE][GRIDSIZE]; 
         System.out.print('\u000C');

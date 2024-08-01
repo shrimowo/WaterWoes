@@ -5,14 +5,13 @@ import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.geom.*;
-import java.util.Scanner; //Keyboard input
+//import java.util.Scanner; //Keyboard input
   // Gnomenu |BAZINGA| \\
     // Coding a menu 14/02/2024 \\
 public class WaterWoes extends JFrame implements ActionListener, MouseListener{
-    final int GRIDSIZE = 10;
-    boolean StartScreen = true;
-    boolean GridGenerating = true;
-    Scanner keyboard;
+    final int PANELSIZE = 1000;
+    final int YOFF = 54;
+    final int XOFF = 8;
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem menuItem;
@@ -20,17 +19,24 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
     Graphics fixer;
     public WaterWoes()
     {
-        Creation test1 = new Creation();
+        setTitle("Wellington Water");
+        this.getContentPane().setPreferredSize(new Dimension(PANELSIZE+1,PANELSIZE+1));
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.pack();
+        this.toFront();
+        this.setVisible(true);
+        
+        //Creation gamePanel = new Creation();
         WaterWoesText prompt = new WaterWoesText("Do You Want A Guide To Water-Works?");
         prompt.setLocationRelativeTo(this);
         prompt.setVisible(true);
         String reply=prompt.getText();
         System.out.println(reply);
         
-        //JPanel panel = new JPanel();
-        //panel.setPreferredSize(new Dimension(504,1000));
-        //myGraphic = new Canvas();
-        //panel.add(myGraphic);
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(500,500));
+        myGraphic = new Canvas();
+        panel.add(myGraphic);
         
         addMouseListener(this);
         
@@ -103,5 +109,18 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
             case "QUIT" : System.exit(0);
                 break;
         }
+    }
+    public void paint (Graphics g){
+        super.paint(g);
+        Graphics2D g2 = (Graphics2D) g;
+        for (int x=0;x<10;x++) {
+            Line2D lin = new Line2D.Float((x*100)+XOFF,YOFF,(x*100)+XOFF,PANELSIZE+YOFF);
+            g2.draw(lin);
+        }
+        for (int x=0;x<10;x++) {
+            Line2D lin = new Line2D.Float(XOFF,(x*100)+YOFF,PANELSIZE+XOFF,(x*100)+YOFF);
+            g2.draw(lin);
+        }
+        g2.drawRect(XOFF,YOFF,PANELSIZE,PANELSIZE);
     }
 }
