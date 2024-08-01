@@ -26,7 +26,7 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
         this.toFront();
         this.setVisible(true);
         
-        //Creation gamePanel = new Creation();
+        SpeedButton speedMenu = new SpeedButton();
         WaterWoesText prompt = new WaterWoesText("Do You Want A Guide To Water-Works?");
         prompt.setLocationRelativeTo(this);
         prompt.setVisible(true);
