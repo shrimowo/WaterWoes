@@ -84,6 +84,7 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
         int mousex=e.getX();
         int mousey=e.getY();
         System.out.println("Will place here:  x:"+(mousex)+" y:"+(mousey));
+        repaint();
     }
     void createDialog(){
         JDialog box = new JDialog(this);

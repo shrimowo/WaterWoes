@@ -2,13 +2,24 @@ import javax.swing.JFrame;
 import javax.swing.JButton;   
 import java.awt.Dimension;
 import java.awt.event.*;
+import java.util.Timer;
+import java.util.TimerTask;
 public class SpeedButton extends JFrame implements ActionListener{
     JButton slowButton;
     JButton pauseButton;
     JButton fastButton;
-    int speed=0;
-    public SpeedButton()
-    {
+    public int speed=0;
+    public int timeTracker=0;
+    Timer myTimer = new Timer();
+    TimerTask task= new TimerTask(){
+        public void run(){
+            timeTracker++; System.out.println("Water Flowed: " + timeTracker);
+        }
+    };
+    public void start(){
+        myTimer.scheduleAtFixedRate(task,10000-(speed*1000),10000-(speed*1000));
+    }
+    public SpeedButton(){
         slowButton = new JButton();
         slowButton.setText("Slow Flow");
         slowButton.setBounds (0,0,100,40);  //x,y,width,height.
@@ -36,7 +47,7 @@ public class SpeedButton extends JFrame implements ActionListener{
         this.pack();
         this.toFront();  // Not too sure what this does, commenting out makes no apparent difference
         this.setVisible(true);
-
+        start();
     }
     public void actionPerformed(ActionEvent e){
         if (e.getSource()==slowButton){
@@ -52,7 +63,7 @@ public class SpeedButton extends JFrame implements ActionListener{
         } else if  (e.getSource()==pauseButton){
             System.out.println("Flow Rate Paused");
             speed = 0;
-            setTitle("Flow Rate is at:"+speed+" Units per Second");
+            setTitle("Flow Rate is at: "+speed+" Units per Second");
         }
     }
 }
