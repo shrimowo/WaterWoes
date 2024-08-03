@@ -5,26 +5,36 @@ import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.geom.*;
+
 //import java.util.Scanner; //Keyboard input
   // Gnomenu |BAZINGA| \\
     // Coding a menu 14/02/2024 \\
 public class WaterWoes extends JFrame implements ActionListener, MouseListener{
     final int PANELSIZE = 1000;
+    final int GRIDSIZE = 10;
     final int YOFF = 54;
     final int XOFF = 8;
+    int mousex;
+    int mousey;
+    int xnearS;
+    int ynearS;
+    int[][] Grid = new int[GRIDSIZE][GRIDSIZE]; 
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem menuItem;
     Canvas myGraphic;
     Graphics fixer;
+
     public WaterWoes()
     {
+        System.out.print('\u000C');
         setTitle("Wellington Water");
         this.getContentPane().setPreferredSize(new Dimension(PANELSIZE+1,PANELSIZE+1));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
         this.toFront();
         this.setVisible(true);
+        
         
         SpeedButton speedMenu = new SpeedButton();
         WaterWoesText prompt = new WaterWoesText("Do You Want A Guide To Water-Works?");
@@ -75,14 +85,16 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
         menuItem.setAccelerator(KeyStroke.getKeyStroke('q'));
         menu.add(menuItem);
         this.pack();  
+        
+        repaint();
     }
     public void mouseExited(MouseEvent e) {} //{System.out.println("exit");}
     public void mouseEntered(MouseEvent e) {}//{System.out.println("enter");}
     public void mouseReleased(MouseEvent e) {}//{System.out.println("release");}
     public void mousePressed(MouseEvent e) {}//{System.out.println("press");}
     public void mouseClicked(MouseEvent e) {
-        int mousex=e.getX();
-        int mousey=e.getY();
+        mousex=e.getX()-XOFF;
+        mousey=e.getY()-YOFF;
         System.out.println("Will place here:  x:"+(mousex)+" y:"+(mousey));
         repaint();
     }
@@ -99,21 +111,88 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
     public void actionPerformed(ActionEvent e){
         String cmd=e.getActionCommand();
         switch(cmd){
-            case "Water Source" : System.out.println("Water Source Placed"); createDialog();
+            case "Water Source" : System.out.println("Water Source Placed"); createDialog(); rounder(); gridPlaceWS(); repaint();
                 break;
-            case "Sink" : System.out.println("Sink Placed"); createDialog();
+            case "Sink" : System.out.println("Sink Placed"); createDialog(); rounder(); gridPlaceP(); repaint();
                 break;
-            case "Pipe" : System.out.println("Pipe Placed"); createDialog();
+            case "Pipe" : System.out.println("Pipe Placed"); createDialog(); rounder(); gridPlaceS(); repaint();
                 break;
-            case "Junction" : System.out.println("Junction Placed"); createDialog();
+            case "Junction" : System.out.println("Junction Placed"); createDialog(); rounder(); gridPlaceJ(); repaint();
                 break;
             case "QUIT" : System.exit(0);
                 break;
         }
     }
+    public void rounder (){
+        double xnear = Math.floor(mousex/100.0);
+        double ynear = Math.floor(mousey/100.0);
+        xnearS = (int)xnear;
+        ynearS = (int)ynear;
+        //System.out.println("x"+(xnearS)+"y"+(ynearS));
+    }
+    public void gridPlaceWS() {
+        for (int x=0;x<GRIDSIZE;x++) //Sets the grid as off by default
+            for (int y=0;y<GRIDSIZE;y++) {
+                if (Grid[x][y] == Grid[xnearS][ynearS]) {
+                    Grid[x][y] = 1;
+                    break;
+                }
+            }
+    }
+    public void gridPlaceP() {
+        for (int x=0;x<GRIDSIZE;x++) //Sets the grid as off by default
+            for (int y=0;y<GRIDSIZE;y++) {
+                if (Grid[x][y] == Grid[xnearS][ynearS]) {
+                    Grid[x][y] = 2;
+                    break;
+                }
+            }
+    }
+    public void gridPlaceS() {
+        for (int x=0;x<GRIDSIZE;x++) //Sets the grid as off by default
+            for (int y=0;y<GRIDSIZE;y++) {
+                if (Grid[x][y] == Grid[xnearS][ynearS]) {
+                    Grid[x][y] = 3;
+                    break;
+                }
+            }
+    }
+    public void gridPlaceJ() {
+        for (int x=0;x<GRIDSIZE;x++) //Sets the grid as off by default
+            for (int y=0;y<GRIDSIZE;y++) {
+                if (Grid[x][y] == Grid[xnearS][ynearS]) {
+                    Grid[x][y] = 4;
+                    break;
+                }
+            }
+    }
     public void paint (Graphics g){
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
+        for (int x=0;x<GRIDSIZE;x++) //Sets the grid as off by default
+            for (int y=0;y<GRIDSIZE;y++) {
+                if (Grid[x][y] == 1) {
+                    final String fileName1="Water_Bucket.PNG";
+                    ImageIcon image1= new ImageIcon(fileName1);
+                    super.paint(g);
+                    image1.paintIcon(this,g,xnearS+XOFF,ynearS+YOFF);
+                } else if (Grid[x][y] == 2) {
+                    final String fileName2="Pipes.PNG";
+                    ImageIcon image2= new ImageIcon(fileName2);
+                    super.paint(g);
+                    image2.paintIcon(this,g,xnearS+XOFF,ynearS+YOFF);                    
+                } else if (Grid[x][y] == 3) {
+                    final String fileName3="Metal_Sink.PNG";
+                    ImageIcon image3= new ImageIcon(fileName3);
+                    super.paint(g);
+                    image3.paintIcon(this,g,xnearS+XOFF,ynearS+YOFF);
+                } else if (Grid[x][y] == 4) {
+                    final String fileName4="Junction_Pipes.PNG";
+                    ImageIcon image4= new ImageIcon(fileName4);
+                    super.paint(g);
+                    image4.paintIcon(this,g,xnearS+XOFF,ynearS+YOFF);
+                }
+            }
         for (int x=0;x<10;x++) {
             Line2D lin = new Line2D.Float((x*100)+XOFF,YOFF,(x*100)+XOFF,PANELSIZE+YOFF);
             g2.draw(lin);

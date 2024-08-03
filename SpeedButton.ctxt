@@ -1,9 +1,9 @@
 #BlueJ class context
 comment0.target=SpeedButton
 comment1.params=
-comment1.target=void\ run()
+comment1.target=void\ newTimer()
 comment2.params=
-comment2.target=void\ start()
+comment2.target=void\ run()
 comment3.params=
 comment3.target=SpeedButton()
 comment4.params=e

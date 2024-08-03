@@ -8,18 +8,24 @@ public class SpeedButton extends JFrame implements ActionListener{
     JButton slowButton;
     JButton pauseButton;
     JButton fastButton;
-    public int speed=0;
+    public int speed=5;
     public int timeTracker=0;
     Timer myTimer = new Timer();
-    TimerTask task= new TimerTask(){
-        public void run(){
-            timeTracker++; System.out.println("Water Flowed: " + timeTracker);
-        }
-    };
-    public void start(){
-        myTimer.scheduleAtFixedRate(task,10000-(speed*1000),10000-(speed*1000));
+    TimerTask task;
+    private void newTimer() {
+        myTimer.cancel();
+        myTimer = new Timer();
+        task = new TimerTask() {
+            public void run() {
+                timeTracker++;
+                System.out.println("Water Flowed: " + timeTracker);
+            }
+        };
+        long timeChange = 1000 * (speed + 1);
+        myTimer.scheduleAtFixedRate(task, timeChange, timeChange);
     }
-    public SpeedButton(){
+    public SpeedButton()
+    {
         slowButton = new JButton();
         slowButton.setText("Slow Flow");
         slowButton.setBounds (0,0,100,40);  //x,y,width,height.
@@ -47,23 +53,25 @@ public class SpeedButton extends JFrame implements ActionListener{
         this.pack();
         this.toFront();  // Not too sure what this does, commenting out makes no apparent difference
         this.setVisible(true);
-        start();
-    }
+        newTimer();
+        }
     public void actionPerformed(ActionEvent e){
-        if (e.getSource()==slowButton){
-            if (speed == 0 ) System.out.println("Flow Rate Can't Be Slowed");
-            else
-            speed--;
+        if (e.getSource()==fastButton){
+            if (speed == 0 ) System.out.println("Flow Rate Can't Be Increased");
+            else {System.out.println("Flow Rate Increased"); speed--;}
             setTitle("Flow Rate is at: "+speed+" Units per Second");
-        } else if  (e.getSource()==fastButton){
-            System.out.println("Flow Rate Increased");
-            speed++;
+            myTimer.cancel();
+            newTimer();
+        } else if  (e.getSource()==slowButton){
+            if (speed >= 10 ) System.out.println("Flow Rate Can't Be Decreased");
+            else {System.out.println("Flow Rate Decreased"); speed++;}
             setTitle("Flow Rate is at: "+speed+" Units per Second");
-            
+            myTimer.cancel();  
+            newTimer();
         } else if  (e.getSource()==pauseButton){
             System.out.println("Flow Rate Paused");
-            speed = 0;
-            setTitle("Flow Rate is at: "+speed+" Units per Second");
+            setTitle("Flow Rate Paused");
+            myTimer.cancel();
         }
     }
 }
