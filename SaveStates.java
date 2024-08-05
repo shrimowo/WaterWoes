@@ -11,15 +11,18 @@ public class SaveStates extends JFrame implements ActionListener
     JButton loadButton1;
     JButton loadButton2;
     JButton loadButton3;
+    WaterWoes waterWoes;
     final int GRIDSIZE = 10;
     int[][] Grid;
     int[][] gridWater;
     int[][] gridSave1 = new int[GRIDSIZE][GRIDSIZE];
     int[][] gridSave2 = new int[GRIDSIZE][GRIDSIZE];
     int[][] gridSave3 = new int[GRIDSIZE][GRIDSIZE];
-    public SaveStates(){
-        GridWorkings waterImport = new GridWorkings();
+    public SaveStates(WaterWoes waterWoes){
+        this.waterWoes = waterWoes;
+        GridWorkings waterImport = new GridWorkings(waterWoes);
         gridWater = waterImport.gridWater;
+        this.Grid=waterWoes.Grid;
         
         WaterWoes gridImport = new WaterWoes();
         Grid = gridImport.Grid;
@@ -68,6 +71,9 @@ public class SaveStates extends JFrame implements ActionListener
         this.pack();
         this.toFront(); 
         this.setVisible(true);
+    }
+    public void update(){
+        Grid=waterWoes.Grid;
     }
     public void actionPerformed(ActionEvent e){
         if (e.getSource()==saveButton1){

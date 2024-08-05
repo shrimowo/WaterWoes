@@ -13,6 +13,8 @@ public class SpeedButton extends JFrame implements ActionListener{
     boolean isPaused;
     Timer myTimer = new Timer();
     TimerTask task;
+    GridWorkings gridEngine;
+    WaterWoes waterWoes;
     private void newTimer() {
         myTimer.cancel();
         myTimer = new Timer();
@@ -20,14 +22,16 @@ public class SpeedButton extends JFrame implements ActionListener{
             public void run() {
                 timeTracker++;
                 System.out.println("Water Flowed: " + timeTracker);
+                gridEngine.gridTech();
             }
         };
         long timeChange = 1000 * (speed + 1);
         myTimer.scheduleAtFixedRate(task, timeChange, timeChange);
     }
-    public SpeedButton()
+    public SpeedButton(WaterWoes waterWoes)
     {
-        GridWorkings gridEngine = new GridWorkings();
+        this.waterWoes = waterWoes;
+        gridEngine = new GridWorkings(waterWoes);
         slowButton = new JButton();
         slowButton.setText("Slow Flow");
         slowButton.setBounds (0,0,100,40); 

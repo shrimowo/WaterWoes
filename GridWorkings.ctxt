@@ -1,7 +1,9 @@
 #BlueJ class context
 comment0.target=GridWorkings
-comment1.params=
-comment1.target=GridWorkings()
+comment1.params=waterWoes
+comment1.target=GridWorkings(WaterWoes)
 comment2.params=
-comment2.target=int[][]\ getGrid()
-numComments=3
+comment2.target=void\ update()
+comment3.params=
+comment3.target=void\ gridTech()
+numComments=4

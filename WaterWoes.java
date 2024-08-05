@@ -1,43 +1,51 @@
-//:P
+/*
+ * This is the Main class, user should only have to run this class and get access
+ * to all the codes features
+ */
+
+//imports
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.geom.*;
-//import java.util.Scanner; //Keyboard input
-  // Gnomenu |BAZINGA| \\
-    // Coding a menu 14/02/2024 \\
 public class WaterWoes extends JFrame implements ActionListener, MouseListener{
+    // final variables
     final int PANELSIZE = 1000;
     final int GRIDSIZE = 10;
-    final int YOFF = 54;
-    final int XOFF = 8;
+    final int YOFF = 54; //Used to offset the menu's change on the grids position
+    final int XOFF = 8; //Used to offset some peculiar 8 pixel differance
+    //click tracking and placment variables
     int mousex;
     int mousey;
     int xnearS;
     int ynearS;
+    
     boolean hasClicked;
     boolean promptConfirm = false;
+    
+    // initialises the grid
     public int[][] Grid = new int[GRIDSIZE][GRIDSIZE]; 
     //private GridWorkingsNEW gridWorkings;
+    
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem menuItem;
     Canvas myGraphic;
     Graphics fixer;
-
+    SpeedButton speedMenu;
     public WaterWoes()
     {
         System.out.print('\u000C');
-        setTitle("Wellington Water");
+        setTitle("Wellington Water"); //Main panel title
         this.getContentPane().setPreferredSize(new Dimension(PANELSIZE+1,PANELSIZE+1));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
         this.toFront();
         this.setVisible(true);
         
-        while (promptConfirm == false){
+        while (promptConfirm == false){ // manages the inital tutorial prompt
             WaterWoesText prompt = new WaterWoesText("Do You Want A Guide To Water-Works? (Yes, or No)");
             prompt.setLocationRelativeTo(this);
             prompt.setVisible(true);
@@ -48,8 +56,8 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
             else System.out.println("Please answer with either 'yes' or 'no'");
         }
         //System.out.println(reply);
-        SpeedButton speedMenu = new SpeedButton();
-        SaveStates saveMenu = new SaveStates();
+        speedMenu = new SpeedButton(this); //Generates speed adjustment panel
+        SaveStates saveMenu = new SaveStates(this); //Generates the save slots menu
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(500,500));
         myGraphic = new Canvas();
@@ -62,7 +70,7 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
         menuBar=new JMenuBar();
         this.setJMenuBar(menuBar);
         
-        menu = new JMenu("Infrastructure Options");
+        menu = new JMenu("Infrastructure Options"); //Panel Title
         menuBar.add(menu);
         
         menuItem=new JMenuItem("Water Source");
@@ -95,15 +103,16 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
         menu.add(menuItem);
         this.pack();  
         
-        repaint();
+        repaint(); //repaint for some precaution (i cant recall the specific reason)
     }
     public void mouseExited(MouseEvent e) {} //{System.out.println("exit");}
-    public void mouseEntered(MouseEvent e) {repaint();}//{System.out.println("enter");}
+    public void mouseEntered(MouseEvent e) {repaint();}// Repaints to avoid menu blanking out top right of the panel//{System.out.println("enter");}
     public void mouseReleased(MouseEvent e) {}//{System.out.println("release");}
     public void mousePressed(MouseEvent e) {}//{System.out.println("press");}
     public void mouseClicked(MouseEvent e) {
         int mousexCheck=e.getX()-XOFF;
         int mouseyCheck=e.getY()-YOFF;
+        //makes sure cursor is inside the grid to avoid bugs
         if (mousexCheck <= 999 && mousexCheck >= 0) {
             if (mouseyCheck <=999 && mouseyCheck >= 0) {
                 mousex = mousexCheck;
@@ -115,8 +124,16 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
     }
     void Guide(){
         System.out.println("Welcome to the Water Woes virtual simulation");
+        System.out.println("Click anywhere within the grid to choose a position");
+        System.out.println("(*(!Make sure your mouse is still!)*)");
+        System.out.println("then navigate to the top right and select a Infrastructure option");
+        System.out.println("(*(!try out the shortcuts!)*)");
+        System.out.println("Watersource will generate 1 Water Per flow, that flow into nearby Pipes or Sinks");
+        System.out.println("Pipes will flow into nearby junctions and sinks");
+        System.out.println("sinks will absorb 1 Water per flow");
+        System.out.println("Junctions are used to connect pipes to other pipes and function the same");
     }
-    void createDialog(){
+    void createDialog(){ //placment that generates after placing an object
         JDialog box = new JDialog(this);
         box.setBounds(400,400,120,90);
         TextArea area = new TextArea("Placment confirmed!");
@@ -126,7 +143,7 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
         box.setVisible(true);
         box.setTitle("");
     }
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e){ //when a menu option is clicked
         String cmd=e.getActionCommand();
         repaint();
         if (hasClicked == true) {
@@ -140,13 +157,14 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
                 case "Junction" : System.out.println("Junction Placed"); createDialog(); rounder(); gridPlaceJ(); repaint();
                     break;
             }
+            speedMenu.gridEngine.update();
         } else System.out.println("Click on a grid to place first");
         switch(cmd){
                 case "QUIT" : System.exit(0);
                     break;
             }
     }
-    public void rounder (){
+    public void rounder (){ //for making mouse positions into functional ccordinates
         double xnear = Math.floor(mousex/100.0);
         double ynear = Math.floor(mousey/100.0);
         xnearS = (int)xnear;
@@ -166,10 +184,10 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
     public void gridPlaceJ() {
         Grid[xnearS][ynearS] = 4;      
     }
-    public void paint (Graphics g){
+    public void paint (Graphics g){ //Paints everything
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
-        for (int x=0;x<GRIDSIZE;x++) { //Sets the grid as off by default
+        for (int x=0;x<GRIDSIZE;x++) { //Paints the objects
             for (int y=0;y<GRIDSIZE;y++) {
                 if (Grid[x][y] == 1) {
                     final String fileName1="Water_Bucket.PNG";
@@ -190,17 +208,14 @@ public class WaterWoes extends JFrame implements ActionListener, MouseListener{
                 }
             }
         }
-        for (int x=0;x<10;x++) {
+        for (int x=0;x<10;x++) { //draws the grid lines
             Line2D lin = new Line2D.Float((x*100)+XOFF,YOFF,(x*100)+XOFF,PANELSIZE+YOFF);
             g2.draw(lin);
         }
-        for (int x=0;x<10;x++) {
+        for (int x=0;x<10;x++) { //draws the grid lines
             Line2D lin = new Line2D.Float(XOFF,(x*100)+YOFF,PANELSIZE+XOFF,(x*100)+YOFF);
             g2.draw(lin);
         }
         g2.drawRect(XOFF,YOFF,PANELSIZE,PANELSIZE);
-    }
-    public int[][] getGrid() {
-        return Grid;
     }
 }

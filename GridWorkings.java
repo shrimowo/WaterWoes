@@ -3,9 +3,17 @@ public class GridWorkings
     final int GRIDSIZE = 10;
     int[][] Grid;
     public int[][] gridWater = new int[GRIDSIZE][GRIDSIZE];
-    instance2.myNewInt = instance.myNum;
-    public GridWorkings()
+    WaterWoes waterWoes;
+    public GridWorkings(WaterWoes waterWoes)
     {
+        this.waterWoes = waterWoes;
+        Grid=waterWoes.Grid;
+        gridTech();
+    }
+    public void update(){
+        Grid=waterWoes.Grid;
+    }
+    public void gridTech(){
         for (int x=0;x<GRIDSIZE;x++) {
                 for (int y=0;y<GRIDSIZE;y++) {
                 if (Grid[x][y] == 1) {
