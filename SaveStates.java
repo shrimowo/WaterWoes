@@ -3,6 +3,9 @@ import javax.swing.JFrame;
 import javax.swing.JButton;   
 import java.awt.Dimension;
 import java.awt.event.*;
+/**
+ * This class is for creating a gui that lets the user save their designs
+ */
 public class SaveStates extends JFrame implements ActionListener
 {
     //Instance variables

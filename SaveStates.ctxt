@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=SaveStates
+comment0.text=\r\n\ This\ class\ is\ for\ creating\ a\ gui\ that\ lets\ the\ user\ save\ their\ designs\r\n
 comment1.params=waterWoes
 comment1.target=SaveStates(WaterWoes)
 comment2.params=

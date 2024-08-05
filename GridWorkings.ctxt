@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=GridWorkings
+comment0.text=\r\n\ this\ class\ manages\ transfering\ water\ between\ objects\r\n
 comment1.params=waterWoes
 comment1.target=GridWorkings(WaterWoes)
 comment2.params=

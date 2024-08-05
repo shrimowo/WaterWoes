@@ -1,3 +1,6 @@
+/**
+ * this class manages transfering water between objects
+ */
 public class GridWorkings
 {
     //Instance variables

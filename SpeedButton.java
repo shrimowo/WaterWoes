@@ -1,13 +1,20 @@
+//imports
 import javax.swing.JFrame;   
 import javax.swing.JButton;   
 import java.awt.Dimension;
 import java.awt.event.*;
 import java.util.Timer;
 import java.util.TimerTask;
+/**
+ * this class creates a prompt that lets the user change the flow rate
+ */
 public class SpeedButton extends JFrame implements ActionListener{
+    //Save buttons
     JButton slowButton;
     JButton pauseButton;
     JButton fastButton;
+    
+    //for water flow speed
     public int speed=5;
     int timeTracker=0;
     boolean isPaused;
@@ -16,15 +23,17 @@ public class SpeedButton extends JFrame implements ActionListener{
     GridWorkings gridEngine;
     WaterWoes waterWoes;
     private void newTimer() {
+        //reset timer
         myTimer.cancel();
         myTimer = new Timer();
         task = new TimerTask() {
             public void run() {
                 timeTracker++;
                 System.out.println("Water Flowed: " + timeTracker);
-                gridEngine.gridTech();
+                gridEngine.gridTech(); //updates the grid workings
             }
         };
+        //changes speed
         long timeChange = 1000 * (speed + 1);
         myTimer.scheduleAtFixedRate(task, timeChange, timeChange);
     }
@@ -32,6 +41,8 @@ public class SpeedButton extends JFrame implements ActionListener{
     {
         this.waterWoes = waterWoes;
         myTimer=new Timer();
+        
+        //create buttons
         gridEngine = new GridWorkings(waterWoes);
         slowButton = new JButton();
         slowButton.setText("Slow Flow");
@@ -52,6 +63,7 @@ public class SpeedButton extends JFrame implements ActionListener{
         fastButton.addActionListener(this); 
         this.add(fastButton);
         
+        //creates button panel
         setTitle("Flow Rate Monitor");
         this.getContentPane().setPreferredSize(new Dimension(300,40));  
         this.getContentPane().setLayout(null);
@@ -60,9 +72,10 @@ public class SpeedButton extends JFrame implements ActionListener{
         this.pack();
         this.toFront(); 
         this.setVisible(true);
-        newTimer();
+        newTimer(); //starts timer
         }
     public void actionPerformed(ActionEvent e){
+        //updates speed
         if (e.getSource()==fastButton){
             if (speed == 0 ) System.out.println("Flow Rate Can't Be Increased");
             else {System.out.println("Flow Rate Increased"); speed--;}
@@ -80,6 +93,7 @@ public class SpeedButton extends JFrame implements ActionListener{
             isPaused=true;
             myTimer.cancel();
         }
+        //Sets title based on speed
         if (speed <= 4)setTitle("Flow Rate is Fast");
         else if (speed >= 6)setTitle("Flow Rate is Slow");
         else if (speed == 5) setTitle("Flow Rate is Normal");
