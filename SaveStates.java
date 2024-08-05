@@ -1,31 +1,42 @@
+//imports
 import javax.swing.JFrame;   
 import javax.swing.JButton;   
 import java.awt.Dimension;
 import java.awt.event.*;
 public class SaveStates extends JFrame implements ActionListener
 {
+    //Instance variables
+    
+    //Water location
     GridWorkings waterImport;
+    
+    //Save buttons
     JButton saveButton1;
     JButton saveButton2;
     JButton saveButton3;
     JButton loadButton1;
     JButton loadButton2;
     JButton loadButton3;
+    
+    //Main class
     WaterWoes waterWoes;
+    
+    //Array containing Save data
     final int GRIDSIZE = 10;
     int[][] Grid;
     int[][] gridWater;
     int[][] gridSave1 = new int[GRIDSIZE][GRIDSIZE];
     int[][] gridSave2 = new int[GRIDSIZE][GRIDSIZE];
     int[][] gridSave3 = new int[GRIDSIZE][GRIDSIZE];
+    
     public SaveStates(WaterWoes waterWoes){
+        //Updates array and allows classes to communicate
         this.waterWoes = waterWoes;
-        GridWorkings waterImport = new GridWorkings(waterWoes);
+        waterImport = waterWoes.speedMenu.gridEngine;
         gridWater = waterImport.gridWater;
         this.Grid=waterWoes.Grid;
         
-        WaterWoes gridImport = new WaterWoes();
-        Grid = gridImport.Grid;
+        //Initialize all save buttons
         saveButton1 = new JButton();
         saveButton1.setText("Save Slot 1");
         saveButton1.setBounds (0,0,110,40); 
@@ -63,19 +74,24 @@ public class SaveStates extends JFrame implements ActionListener
         loadButton3.addActionListener(this); 
         this.add(loadButton3);
         
+        //Initialize pane
         setTitle("Save Slots");
         this.getContentPane().setPreferredSize(new Dimension(330,80));  
         this.getContentPane().setLayout(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);    
         
+        //settings
         this.pack();
         this.toFront(); 
         this.setVisible(true);
     }
-    public void update(){
+    public void update(){ //update
         Grid=waterWoes.Grid;
     }
+    
+    //Action listener
     public void actionPerformed(ActionEvent e){
+        //Saves
         if (e.getSource()==saveButton1){
             for (int x=0;x<GRIDSIZE;x++) {
                 for (int y=0;y<GRIDSIZE;y++) {
@@ -98,29 +114,33 @@ public class SaveStates extends JFrame implements ActionListener
             }
             System.out.println("This configuration was saved to save slot 3!");
         }
+        //Loads
         if (e.getSource()==loadButton1){
             for (int x=0;x<GRIDSIZE;x++) {
                 for (int y=0;y<GRIDSIZE;y++) {
                     Grid[x][y] = gridSave1[x][y];
-                    gridWater[x][y] = 0;
+                    waterImport.gridWater[x][y] = 0;
                 }
             }
+            this.gridWater=waterImport.gridWater;
             System.out.println("slot 1 was loaded!");
         } else if  (e.getSource()==loadButton2){
             for (int x=0;x<GRIDSIZE;x++) {
                 for (int y=0;y<GRIDSIZE;y++) {
                     Grid[x][y] = gridSave2[x][y];
-                    gridWater[x][y] = 0;
+                    waterImport.gridWater[x][y] = 0;
                 }
             }
+            this.gridWater=waterImport.gridWater;
             System.out.println("slot 2 was loaded!");
         } else if  (e.getSource()==loadButton3){
             for (int x=0;x<GRIDSIZE;x++) {
                 for (int y=0;y<GRIDSIZE;y++) {
                     Grid[x][y] = gridSave3[x][y];
-                    gridWater[x][y] = 0;
+                    waterImport.gridWater[x][y] = 0;
                 }
             }
+            this.gridWater=waterImport.gridWater;
             System.out.println("slot 3 was loaded!");
         }
     }

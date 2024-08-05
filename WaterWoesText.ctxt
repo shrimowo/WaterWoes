@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=WaterWoesText
+comment0.text=\r\n\ Returns\ user\ input\ from\ generated\ dialogue\ box\r\n\ \r\n\ Emmett\ Petty\r\n\ 5/08/24\r\n
 comment1.params=question
 comment1.target=WaterWoesText(java.lang.String)
 comment2.params=e

@@ -11,7 +11,7 @@ public class SpeedButton extends JFrame implements ActionListener{
     public int speed=5;
     int timeTracker=0;
     boolean isPaused;
-    Timer myTimer = new Timer();
+    Timer myTimer;
     TimerTask task;
     GridWorkings gridEngine;
     WaterWoes waterWoes;
@@ -31,6 +31,7 @@ public class SpeedButton extends JFrame implements ActionListener{
     public SpeedButton(WaterWoes waterWoes)
     {
         this.waterWoes = waterWoes;
+        myTimer=new Timer();
         gridEngine = new GridWorkings(waterWoes);
         slowButton = new JButton();
         slowButton.setText("Slow Flow");
